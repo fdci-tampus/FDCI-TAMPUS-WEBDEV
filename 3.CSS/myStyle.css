@@ -1,0 +1,99 @@
+/*start of div container*/
+.container {
+	width: auto;
+	font-family: sans-serif;
+}
+
+#top {
+	background-color: #4caf50;
+	color: white;
+	padding: 15px 50px;
+
+}
+
+/*start of div wrapper*/
+/*start of div menubar*/
+#menubar {
+	width: 20%;
+	margin-left: -40px;
+	float: left;
+	padding: 25px 35px 0 0;
+}
+
+.menuitem {
+	background-color: #d3d3d3;
+	color: black;
+	border: 1.5px solid #999999;
+	border-radius: 5px;
+	list-style: none;
+	margin-bottom: 2px;
+	padding: 5px 5px;
+	overflow: hidden;
+}
+
+.selected {
+	background-color: #4caf50 !important;
+	border-color: #40a040 !important;
+}
+/*end of div menubar*/
+/*start of div main*/
+#main {
+	float: left;
+	width: 50%;
+}
+
+.colorbuttons {
+	color: white;
+	text-decoration: none;
+	padding: 5px 10px;
+	display: inline-block;
+	margin-bottom: 10px;
+}
+
+#greenbutton {
+	background-color: #008000;	
+}
+
+#orangebutton {
+	background-color: #ffa500;	
+}
+
+#bluebutton {
+	background-color: #0000ff;	
+}
+
+#redbutton {
+	background-color: #f00;	
+}
+/*end of div main*/
+/*end of div wrapper*/
+
+#bottom {
+	float: left;
+	width: 100%;
+	margin-top: 10px;
+	padding: 20px 0;
+	background-color: #f1f1f1;
+	border: 1px solid #d5d5d5;
+	text-align: center;
+	display: block;
+}
+/*end of div container*/
+
+@media screen and (max-width: 600px) {
+  #menubar {
+	width: 100%;
+}
+
+#main {
+	width: 100%;
+}
+#top {
+	font-size: 5vw;
+	text-align: center;
+	padding: 15px 0;
+}
+.colorbuttons {
+	display: block;
+}
+}
