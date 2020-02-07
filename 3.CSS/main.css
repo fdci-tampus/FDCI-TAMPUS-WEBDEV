@@ -1,0 +1,48 @@
+body {
+ /* background: -moz-linear-gradient(45deg, rgba(213, 15, 61, 0.6), rgba(13, 17, 198, 0.69) 100%);
+  background: -webkit-linear-gradient(45deg, rgba(213, 15, 61, 0.6), rgba(13, 17, 198, 0.69) 100%);
+  background: linear-gradient(to 45deg, rgba(213, 15, 61, 0.6), rgba(13, 17, 198, 0.69) 100%);*/
+  background: radial-gradient(circle, rgba(138,233,241,0.8257842331789853) 0%, rgba(255,213,248,1) 100%);
+  background: -moz-radial-gradient(circle, rgba(138,233,241,0.8257842331789853) 0%, rgba(255,213,248,1) 100%);
+  background: -webkit-radial-gradient(circle, rgba(138,233,241,0.8257842331789853) 0%, rgba(255,213,248,1) 100%);
+}
+
+/*header {
+	margin: 5% 10% 0 10%;
+}
+
+nav, section {
+	margin: 0 10% 0 10%;
+}*/
+
+.jumbotron h1 {
+	font-size: 40px;
+	text-align: center
+
+}
+
+.jumbotron p {
+	font-size: 12px;
+	text-align: center
+}
+.carouselImage {
+	height: 500px !important;
+	width: 100%;
+}
+
+footer {
+	margin-top: 50px;
+
+}
+
+@media screen and (max-width: 600px) {
+
+.jumbotron h1 {
+	font-size: 15vw;
+	text-align: center
+	padding: 0 10%;
+}
+}
+/*
+<div class="rare-wind-gradient color-block mb-3 mx-auto rounded-circle z-depth-1-half"></div>
+background: bg-color bg-image position/bg-size bg-repeat bg-origin bg-clip bg-attachment initial|inherit;*/
