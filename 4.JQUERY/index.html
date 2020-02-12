@@ -1,0 +1,259 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>JAVASCRIPT ACTIVITY</title>
+
+		<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+
+
+</head>
+<body>
+
+	<div class="container">
+		<section>
+			<h4>PART 1:</h4>
+			<p>Get the sum of odd numbers from 0 to <span id="lblMax">50</span></p>
+			<div class="row">
+				<div class="col-xs-2">	
+					<article class="input-group input-group-sm">
+					
+						<span class="input-group-addon" id="maxNum">Max odd number: </span>
+					
+						<input type="text" class="form-control" aria-describedby="sizing-addon3" value="50" id="maxOddNum">
+
+					</article>
+
+				</div>
+					<div class="col-xs-2">
+						<button class="btn btn-success btn-block btn-sm" onclick="generate()">generate</button>
+					</div>
+			</div>
+			<br>
+				<h4>SUM: <strong id="sum"></strong></h4>
+			
+		</section>
+		<hr>
+
+		<section>
+			<h4>PART 2:</h4>
+			<p>Compute the average mark of student Hillary and output her corresponding grade</p>
+
+			<div class="row">
+				<div class="col-xs-6">
+					<table class="table table-bordered">
+						<tr>
+							<td colspan="2" align="center"><strong>Marks</strong></td>
+						</tr>
+						<tr>
+							<td>PE</td>
+							<td id="pe"></td>
+						</tr>
+						<tr>
+							<td>MATH</td>
+							<td id="math"></td>
+						</tr>
+						<tr>
+							<td>SCIENCE</td>
+							<td id="science"></td>
+						</tr>
+						<tr>
+							<td>ENGLISH</td>
+							<td id="english"></td>
+						</tr>
+						<tr>
+							<td>FILIPINO</td>
+							<td id="filipino"></td>
+						</tr>
+					</table>
+				</div>
+
+				<div class="col-xs-6">
+					<table class="table table-bordered">
+						<tr>
+							<td colspan="2" align="center"><strong>Grade Equivalent</strong></td>
+						</tr>
+						<tr>
+							<td><60</td>
+							<td>F</td>
+						</tr>
+						<tr>
+							<td><70</td>
+							<td>D</td>
+						</tr>
+						<tr>
+							<td><80</td>
+							<td>C</td>
+						</tr>
+						<tr>
+							<td><90</td>
+							<td>B</td>
+						</tr>
+						<tr>
+							<td><100</td>
+							<td>A</td>
+						</tr>
+					</table>
+				</div>
+
+			</div>
+			<article>
+			<h4>Average Grade: <strong id="avgGrade"></strong></h4>
+			<h4>Grade: <strong id="grade"></strong></h4>
+			</article>
+		</section>
+		<hr>
+
+		<section>
+			<h4>PART 3:</h4>
+			<p>A program that will loop from from 0 to 100 and on every number divisible by three, print beep and on every number divisible by five, print boop so if the number is divisible by five and three it must print beepboop</p>
+
+			<article>
+			<h4><strong id="partThree"></strong></h4>
+			</article>
+		</section>
+		<hr>
+
+
+		<section>
+			<h4>BONUS:</h4>
+			<p>A program to output following pattern, using a nested for loop</p>
+
+			<article>
+			<h3><strong id="bonus"></strong></h3>
+			</article>
+		</section>
+
+
+	<script type="text/javascript">
+
+		part1();
+		part2();
+		part3();
+		bonus();
+
+		function part1(num=null){
+
+			var sum=0;
+			var max = (num)?num:50;
+
+
+			for (i=0; i < max; i++) {
+
+			  if(i%2 != 0){  
+			     sum = sum + i;
+			  }  
+			}
+			document.getElementById('sum').innerHTML = sum;
+		}
+
+		function generate() {
+			a = document.getElementById('maxOddNum').value;
+			document.getElementById('lblMax').innerHTML = a;
+			part1(a);
+		}
+
+		function part2() {
+			var grade;
+			var avg;
+
+			/*sub1 = 40;*/
+			pe = 100;
+			math = 99;
+			science = 98;
+			english = 80;
+			filipino = 70;
+
+			document.getElementById('pe').innerHTML = pe;
+			document.getElementById('math').innerHTML = math;
+			document.getElementById('science').innerHTML = science;
+			document.getElementById('english').innerHTML = english;
+			document.getElementById('filipino').innerHTML = filipino;
+
+			grade = pe + math + science + english + filipino;
+			avg=grade/5;
+
+			/*document.write("<br>Part 2<br>Average grade: " + avg + "<br>");*/
+			document.getElementById('avgGrade').innerHTML = avg;
+
+
+			if (avg < 60) {
+				document.getElementById('grade').innerHTML = "F";
+			}
+			else if (avg < 70){
+			  	document.getElementById('grade').innerHTML = "D";
+			}
+			  
+			else if (avg < 80){
+			  	document.getElementById('grade').innerHTML = "C";
+			}
+			  
+			else if (avg < 90){
+			  	document.getElementById('grade').innerHTML = "B";
+			}
+			  
+			else if (avg < 100){
+			  	document.getElementById('grade').innerHTML = "A";
+			}
+			  
+			else {
+				document.getElementById('grade').innerHTML = "No equivalent grade";
+			}
+		}
+
+		function part3() {
+			text="";
+			for (i=1; i<=100; i++) {
+				document.getElementById('partThree').innerHTML += i;
+
+				/*document.write("<br>"+i);*/
+		  
+				if (i%3==0 && i%5==0) {
+		  			document.getElementById('partThree').innerHTML += " beepboop" +"<br>";
+		  		}
+		  
+		  		else if (i%3==0){
+		   			/*document.write(" beep"); */
+		   			document.getElementById('partThree').innerHTML += " beep" +"<br>";
+		    	}
+		    
+		    	else if (i%5==0){
+		    		/*document.write(" boop");*/
+		    		document.getElementById('partThree').innerHTML += " boop" +"<br>";
+		    	}
+		    	else {
+		    		document.getElementById('partThree').innerHTML += "<br>";
+		    	}
+
+
+		  	}
+		}
+
+		function bonus(){
+
+		  	
+		  	for (i=1; i<=5;i++) {
+		  		for (k=1; k<=i; k++){
+		    		if (k==i){
+		    			/*document.write("*");*/
+		    			document.getElementById('bonus').innerHTML += "*";
+		      		}
+
+		      		else
+		      			document.getElementById('bonus').innerHTML += "*	";
+		    		}
+		   			
+		   			document.getElementById('bonus').innerHTML += "<br>";
+		  	}
+		}
+		  
+	</script>
+</div>
+</body>
+</html>
