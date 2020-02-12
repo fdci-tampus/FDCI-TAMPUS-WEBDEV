@@ -9,14 +9,12 @@
 	<!-- Optional theme -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
 
-	<script src=s"https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></cript>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
 
-
-
-
 </head>
+
 <body>
 
 	<div class="container">
@@ -47,6 +45,43 @@
 		<section>
 			<h4>PART 2:</h4>
 			<p>Compute the average mark of student Hillary and output her corresponding grade</p>
+
+			<div class="row">
+				<div class="col-xs-12">
+					<table>
+						<tr>
+							<td class="input-group-addon" id="maxNum"><strong>PE</strong></td>
+							<td class="input-group-addon" id="maxNum"><strong>MATH</strong></td>
+							<td class="input-group-addon" id="maxNum"><strong>SCIENCE</strong></td>
+							<td class="input-group-addon" id="maxNum"><strong>ENGLISH</strong></td>
+							<td class="input-group-addon" id="maxNum"><strong>FILIPINO</strong></td>
+						</tr>
+						<tr>
+							<td>
+								<input type="number" class="form-control" aria-describedby="sizing-addon3" value="100" id="subjPE">
+							</td>
+							<td>
+								<input type="number" class="form-control" aria-describedby="sizing-addon3" value="99" id="subjMath">
+							</td>
+							<td>
+								<input type="number" class="form-control" aria-describedby="sizing-addon3" value="98" id="subjScience">
+							</td>
+							<td>
+								<input type="number" class="form-control" aria-describedby="sizing-addon3" value="80" id="subjEnglish">
+							</td>
+							<td>
+								<input type="number" class="form-control" aria-describedby="sizing-addon3" value="70" id="subjFilipino">
+							</td>
+						</tr>
+					</table>
+				</div>
+			</div><br>
+			<div class="row">
+				<div class="col-xs-2">
+					<button class="btn btn-success btn-block btn-sm" onclick="generateGrade()">generate</button>
+				</div>
+			</div>
+			<br>
 
 			<div class="row">
 				<div class="col-xs-6">
@@ -111,6 +146,7 @@
 			<h4>Grade: <strong id="grade"></strong></h4>
 			</article>
 		</section>
+		<br>
 		<hr>
 
 		<section>
@@ -162,15 +198,26 @@
 			part1(a);
 		}
 
-		function part2() {
-			var grade;
+		function generateGrade() {
+			pe = document.getElementById('subjPE').value;
+			math = document.getElementById('subjMath').value;
+			science = document.getElementById('subjScience').value;
+			english = document.getElementById('subjEnglish').value;
+			filipino = document.getElementById('subjFilipino').value;
+			
+			part2(pe,math,science,english,filipino);
+		}
+
+		function part2(subj1=0,subj2=0,subj3=0,subj4=0,subj5=0) {
+			var grade=0;
 			var avg;
 
-			pe = 100;
-			math = 99;
-			science = 98;
-			english = 80;
-			filipino = 70;
+			pe = parseInt((subj1) ? subj1 : document.getElementById('subjPE').value);
+			math = parseInt((subj2) ? subj2 : document.getElementById('subjMath').value);
+			science = parseInt((subj3) ? subj3 : document.getElementById('subjScience').value);
+			english = parseInt((subj4) ? subj4 : document.getElementById('subjEnglish').value);
+			filipino = parseInt((subj5) ? subj5 : document.getElementById('subjFilipino').value);
+
 
 			document.getElementById('pe').innerHTML = pe;
 			document.getElementById('math').innerHTML = math;
@@ -179,9 +226,10 @@
 			document.getElementById('filipino').innerHTML = filipino;
 
 			grade = pe + math + science + english + filipino;
+			console.log(grade);
+
 			avg=grade/5;
 
-			/*document.write("<br>Part 2<br>Average grade: " + avg + "<br>");*/
 			document.getElementById('avgGrade').innerHTML = avg;
 
 
@@ -232,8 +280,6 @@
 		    	else {
 		    		document.getElementById('partThree').innerHTML += "<br>";
 		    	}
-
-
 		  	}
 		}
 
