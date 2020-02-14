@@ -22,14 +22,13 @@
 				<div class="input-group input-group-sm">
 					<span class="input-group-addon" id="lblText">Enter text: </span>
 					<input type="text" class="form-control" aria-describedby="sizing-addon3" value="The quickest brown fox" id="txtText">
+					<span class="input-group-btn">
+						<button class="btn btn-success btn-block btn-sm" onclick="generate()">generate</button>
+					</span>	
 				</div>
-
-				<div class="col-xs-4">
-					<button class="btn btn-success btn-block btn-sm" onclick="generate()">generate</button>
-				</div>	
 			</div>
 		</div>
-		<h5>The longest word: <span id="output"></span></h5>
+		<h5>The longest word: <strong><span id="output"></span></strong></h5>
 		<hr>
 
 		<h4>PART 2:</h4>
@@ -39,14 +38,13 @@
 				<div class="input-group input-group-sm">
 					<span class="input-group-addon" id="lblText">Enter number: </span>
 					<input type="number" class="form-control" aria-describedby="sizing-addon3" value="1" id="txtPrime" min="0">
-				</div>
-
-				<div class="col-xs-4">
-					<button class="btn btn-success btn-block btn-sm" onclick="isPrime()">generate</button>
+					<span class="input-group-btn">
+						<button class="btn btn-success btn-block btn-sm" onclick="isPrime()">generate</button>
+					</span>
 				</div>
 			</div>
 		</div>
-		<h5>OUTPUT: <span id="primeOutput"></span></h5>
+		<h5>OUTPUT: <strong><span id="primeOutput"></span></strong></h5>
 		<hr>
 
 		<h4>PART 3:</h4>
@@ -56,13 +54,13 @@
 				<div class="input-group input-group-sm">
 					<span class="input-group-addon" id="lblText">Hour</span>			
 					<input type="number" class="form-control" aria-describedby="sizing-addon3" value="0" id="txtHour" min="0">
-				</div>
-				<div class="col-xs-4">
-					<button class="btn btn-success btn-block btn-sm" onclick="convert()">Calculate</button>
+					<span class="input-group-btn">
+						<button class="btn btn-success btn-block btn-sm" onclick="convert()">Calculate</button>
+					</span>
 				</div>
 			</div>
 		</div>
-		<h5>OUTPUT (hour to min): <span id="convertOutput"></span></h5>
+		<h5>OUTPUT (hour to min): <strong><span id="convertOutput"></span></strong></h5>
 	</div>
 
 
