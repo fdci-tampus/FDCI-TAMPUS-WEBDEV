@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>JAVASCRIPT: Activity 2</title>
+
+			<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+</head>
+<body>
+	<div class="container">
+		<h4>PART 1:</h4>
+		<p>A function that would accept a string parameter and output the longest word within the string</span></p>
+		<div class="row">
+			<div class="col-xs-6">	
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon" id="lblText">Enter text: </span>
+					<input type="text" class="form-control" aria-describedby="sizing-addon3" value="The quickest brown fox" id="txtText">
+				</div>
+
+				<div class="col-xs-4">
+					<button class="btn btn-success btn-block btn-sm" onclick="generate()">generate</button>
+				</div>	
+			</div>
+		</div>
+		<h5>The longest word: <span id="output"></span></h5>
+		<hr>
+
+		<h4>PART 2:</h4>
+		<p>A function that accepts a number parameter and output if the number is prime or not</span></p>
+		<div class="row">
+			<div class="col-xs-6">	
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon" id="lblText">Enter number: </span>
+					<input type="number" class="form-control" aria-describedby="sizing-addon3" value="1" id="txtPrime" min="0">
+				</div>
+
+				<div class="col-xs-4">
+					<button class="btn btn-success btn-block btn-sm" onclick="isPrime()">generate</button>
+				</div>
+			</div>
+		</div>
+		<h5>OUTPUT: <span id="primeOutput"></span></h5>
+		<hr>
+
+		<h4>PART 3:</h4>
+		<p>A form that has 1 input for hour. On submit, display equivalent minutes from the inputted hour.</span></p>
+		<div class="row">
+			<div class="col-xs-6">	
+				<div class="input-group input-group-sm">
+					<span class="input-group-addon" id="lblText">Hour</span>			
+					<input type="number" class="form-control" aria-describedby="sizing-addon3" value="0" id="txtHour" min="0">
+				</div>
+				<div class="col-xs-4">
+					<button class="btn btn-success btn-block btn-sm" onclick="convert()">Calculate</button>
+				</div>
+			</div>
+		</div>
+		<h5>OUTPUT (hour to min): <span id="convertOutput"></span></h5>
+	</div>
+
+
+	<script type="text/javascript">
+
+		function generate(){
+			str = document.getElementById('txtText').value;
+			var wordArray = str.split(" ");
+			console.log(wordArray);
+			var wordLength=0;
+			var word="";
+
+				for(i=0; i < wordArray.length; i++) {
+					if(wordArray[i].length > wordLength){
+						wordLength = wordArray[i].length;
+						word = wordArray[i];
+					}
+				}
+			document.getElementById('output').innerHTML = word;
+		}
+
+		function isPrime(){
+
+			count=0;
+			num = document.getElementById('txtPrime').value;
+
+			for(i=1; i <= num; i++) {
+					
+				if (i!=1 && i != num) {
+
+					if (num%i == 0) {
+						count += 1;
+					}
+				}
+				else if(i == 1) {
+					count+=1;
+				}
+
+				else if(i == num) {
+					count+=1;
+				}
+
+			}
+
+			if (count > 2 || num == 0) {
+				document.getElementById('primeOutput').innerHTML = num + " is not a prime number";
+			}
+			else if (num < 0) {
+				document.getElementById('primeOutput').innerHTML = num + " is an invalid number. Please enter positive number";
+			}
+			else {
+				document.getElementById('primeOutput').innerHTML = num + " is a prime number";
+			}
+		}
+
+		function convert(){
+			hour = document.getElementById('txtHour').value;
+			hourToMinute = hour * 60;
+
+			document.getElementById('convertOutput').innerHTML = hourToMinute;
+
+		}
+		
+	</script>
+</body>
+</html>
