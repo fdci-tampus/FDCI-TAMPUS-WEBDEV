@@ -73,12 +73,19 @@
 			var wordLength=0;
 			var word="";
 
-				for(i=0; i < wordArray.length; i++) {
-					if(wordArray[i].length > wordLength){
-						wordLength = wordArray[i].length;
-						word = wordArray[i];
-					}
+			for(i=0; i < wordArray.length; i++) {
+				if(wordArray[i].length > wordLength){
+					wordLength = wordArray[i].length;
 				}
+			}
+			
+			for(i=0; i < wordArray.length; i++) {
+				if(wordArray[i].length == wordLength){
+					word = word + wordArray[i] + " ";
+				}
+			}
+
+				console.log(word);
 			document.getElementById('output').innerHTML = word;
 		}
 
