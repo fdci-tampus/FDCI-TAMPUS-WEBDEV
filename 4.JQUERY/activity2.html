@@ -107,10 +107,9 @@
 
 			}
 
-			if (count > 2 || num == 0 || num == 1) {
+			if (count > 2 || num == 0 || count <= 1) {
 				document.getElementById('primeOutput').innerHTML = num + " is not a prime number";
 			}
-
 			else if (num < 0) {
 				document.getElementById('primeOutput').innerHTML = num + " is an invalid number. Please enter positive number";
 			}
