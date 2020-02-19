@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>JAVASCRIPT: Activity 2</title>
+
+			<!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+	<!-- Optional theme -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<!-- Latest compiled and minified JavaScript -->
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+</head>
+<body>
+	<div class = "container">
+		<h4>PART 1:</h4>
+		<p>A form that accepts a name and age input. On every form submit, add the inputted values to an object. Display the object value and display the readable formatted value. </span></p>
+		
+		<form>
+			<label for="lblName">Name: </label>
+			<input type="text" name="personName" id="txtName" placeholder="your Name">
+			<label for="lblAge">Age: </label>
+			<input type="number" name="personAge" id="txtAge" placeholder="Age">	
+			<input class="btn btn-primary btn-sm" type="button" value="Add" id="add" onclick="generate()">		
+			
+			<h3><strong>Final Object: </strong></h3>
+			<h4><span id="finalObject"></span></h4>
+			<br>
+			<h3><strong>Readable Format: </strong></h3>
+			<h4><span id="readableFormat"></span></h4>
+			<hr>
+		</form>
+
+	<h4>PART 2:</h4>
+		<p>Create a PRODUCT INVENTORY. Create a form that will accept the name, stocks, price of product. <br>
+			On every submit add the product to the list or to an object. Display the product list. <br>
+			There must be also a button that when clicked will calculate how much is the total cost of EVERY product and calculate for the total cost of ALL the products.</span></p>
+		<h1>Product Inventory</h1><br>
+
+		<form>
+			<label for="lblProductName">Name: </label>
+			<input type="text" name="productName" id="txtProductName" placeholder="Product Name"><br><br>
+			<label for="lblStock">Stocks: </label>
+			<input type="number" name="productStock" id="txtProductStock" placeholder="Number of Stocks"><br><br>
+			<label for="lblStock">Price: </label>
+			<input type="number" name="productPrice" id="txtProductPrice" placeholder="Price"><br><br>
+			<input  class="btn btn-primary btn-sm" type="button" value="Add" id="addProduct">
+
+			<h2>Product List: </h2>
+			<h3><strong><span id="productList"></span></strong></h3>
+
+			<input class="btn btn-primary btn-sm" type="button" value="Calculate total value for each product" id="totalProduct">
+
+			<h3><strong>Product Total Value: </strong></h3>
+			<h4><span id="productTotalValue"></span></h4>
+			<h3><strong>Total Value: </strong></h3>
+			<h4><span id="productTotal"></span></h4>
+			<hr>
+
+		</form>
+	</div>
+
+	<script type="text/javascript">
+
+		var person;
+		var product;
+		var totalProduct=0;
+		var sumPerProduct=0;
+
+		function generate() {
+
+			name = document.getElementById('txtName').value;
+			age = document.getElementById('txtAge').value;
+
+			var personInfo = {
+				name: name,
+				age: age,
+			};
+
+			var myJSON = JSON.stringify(personInfo);
+			
+			if (Array.isArray(person)==true) {
+				person.push(myJSON);
+			}
+
+			else {
+				person= new Array (myJSON);
+			}
+
+			console.log(person);
+
+			document.getElementById('finalObject').innerHTML = person;
+			document.getElementById('readableFormat').innerHTML="";
+
+			for (x of person){
+				parsePerson = JSON.parse(x);
+				keys=Object.keys(parsePerson);
+				document.getElementById('readableFormat').innerHTML +=  keys[0] +" : " + parsePerson.name + ", " + keys[1] + " : " + parsePerson.age + "<br>";
+			}
+		}
+
+		/*function generateInventory() */
+		document.getElementById('addProduct').onclick = function(){
+
+			name = document.getElementById('txtProductName').value;
+			stocks = document.getElementById('txtProductStock').value;
+			price = document.getElementById('txtProductPrice').value;
+
+			var productInfo = {
+				name: name,
+				stocks: stocks,
+				price: price,
+			};
+
+			console.log(Object.entries(productInfo));
+
+			var myJSON = JSON.stringify(productInfo);
+
+			console.log("JSON"+myJSON);
+			
+			if (Array.isArray(product)==true) {
+				product.push(myJSON);
+			}
+
+			else {
+				product= new Array (myJSON);
+			}
+
+			document.getElementById('productList').innerHTML="";
+			totalProduct=0;
+
+
+			for (x of product){
+				parseproduct = JSON.parse(x);
+				keys=Object.keys(parseproduct);
+				document.getElementById('productList').innerHTML +=  keys[0] +" : " + parseproduct.name + ", " + keys[1] + " : " + parseproduct.stocks + ", " + keys[2] + " : " + parseproduct.price + "<br>";
+
+				sumPerProduct = parseproduct.stocks * parseproduct.price;
+				totalProduct = totalProduct + sumPerProduct;
+				console.log(sumPerProduct);
+			}
+		}
+
+		document.getElementById('totalProduct').onclick = function() {
+			document.getElementById('productTotalValue').innerHTML="";
+				for (x of product){
+					parseproduct = JSON.parse(x);
+					keys=Object.keys(parseproduct);
+					document.getElementById('productTotalValue').innerHTML += parseproduct.name + " will have a total value of " + sumPerProduct + "<br>";
+					document.getElementById('productTotal').innerHTML = "Total " + totalProduct;
+					}
+				}
+				
+
+	</script>
+</body>
+</html>
