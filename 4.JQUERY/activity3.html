@@ -142,6 +142,7 @@
 			name = document.getElementById('txtName').value;
 			age = document.getElementById('txtAge').value;
 			form = document.getElementById('form1');
+			var success=false;
 
 			errorMessage = document.getElementById('alertPart1');
 			errorMessage.classList.add("hidden");
@@ -149,16 +150,16 @@
 
 			if (!validateEmptyField(name) && !validateEmptyField(age)) {
 				document.getElementById('validationMessage').innerHTML = "Name and Age are required";
-				errorMessage.classList.remove("hidden")
+				errorMessage.classList.remove("hidden");
 
 			}
 			else if (!validateEmptyField(name)) {
 				document.getElementById('validationMessage').innerHTML = "Name is required";
-				errorMessage.classList.remove("hidden")
+				errorMessage.classList.remove("hidden");
 			}
 			else if (!validateEmptyField(age)){
 				document.getElementById('validationMessage').innerHTML = "Age is required";
-				errorMessage.classList.remove("hidden")
+				errorMessage.classList.remove("hidden");
 			}
 
 
@@ -167,32 +168,33 @@
 				if (!validateNumericField(age,1))
 				{
 					document.getElementById('validationMessage').innerHTML = "Age must be 1 year old and above";
-					errorMessage.classList.remove("hidden")
+					errorMessage.classList.remove("hidden");
 				}
 
 				else if (!validateNumericField(age,2))
 				{
 					document.getElementById('validationMessage').innerHTML = "Age must be numeric";
-					errorMessage.classList.remove("hidden")
+					errorMessage.classList.remove("hidden");
 				}
 
 				else if (!validateAlphaNumeric(name,0)) {
 					document.getElementById('validationMessage').innerHTML = "Name must be alphanumeric characters only";
-					errorMessage.classList.remove("hidden")
+					errorMessage.classList.remove("hidden");
 				}
 
 				else if (!validateAlphaNumeric(name,1)) {
 					document.getElementById('validationMessage').innerHTML = "Name must contains alpha characters";
-					errorMessage.classList.remove("hidden")
+					errorMessage.classList.remove("hidden");
 				}
 
 				else if (!validateAlphaNumeric(name,2)) {
 					document.getElementById('validationMessage').innerHTML = "Name must contains atleast 2 letters";
-					errorMessage.classList.remove("hidden")
+					errorMessage.classList.remove("hidden");
 				}
 
 				else {
 
+					success=true;
 					var personInfo = {
 						name: name,
 						age: age,
@@ -220,7 +222,9 @@
 					}
 				}
 			}
-			form.reset();
+			if (success) {
+				form.reset();
+			}
 		}
 
 		document.getElementById('addProduct').onclick = function(){
@@ -228,6 +232,7 @@
 			name = document.getElementById('txtProductName').value;
 			stocks = document.getElementById('txtProductStock').value;
 			price = document.getElementById('txtProductPrice').value;
+			var success = false;
 
 			form = document.getElementById('form2');
 
@@ -236,21 +241,21 @@
 
 			if (!validateEmptyField(name) && !validateEmptyField(stocks) && !validateEmptyField(price)) {
 				document.getElementById('validationMessagePart2').innerHTML = "Product Name is required" + "<br>" + "Stocks is required" + "<br>" + "Price is required";
-				errorMessage.classList.remove("hidden")
+				errorMessage.classList.remove("hidden");
 			}
 
 			else if(!validateEmptyField(name)) {
 				document.getElementById('validationMessagePart2').innerHTML = "Product Name is required";
-				errorMessage.classList.remove("hidden")
+				errorMessage.classList.remove("hidden");
 			}
 			else if (!validateEmptyField(stocks)){
 				document.getElementById('validationMessagePart2').innerHTML = "Stocks is required";
-				errorMessage.classList.remove("hidden")
+				errorMessage.classList.remove("hidden");
 			}
 
 			else if (!validateEmptyField(price)){
 				document.getElementById('validationMessagePart2').innerHTML = "Price is required";
-				errorMessage.classList.remove("hidden")
+				errorMessage.classList.remove("hidden");
 			}
 
 			else {
@@ -258,30 +263,30 @@
 				if (!validateNumericField(stocks,1))
 				{
 					document.getElementById('validationMessagePart2').innerHTML = "Stocks must not be less than 0";
-					errorMessage.classList.remove("hidden")
+					errorMessage.classList.remove("hidden");
 				}
 
 				else if (!validateNumericField(stocks,2))
 				{
 					document.getElementById('validationMessagePart2').innerHTML = "Stocks must be numeric";
-					errorMessage.classList.remove("hidden")
+					errorMessage.classList.remove("hidden");
 				}
 
 				else if (!validateNumericField(price,1))
 				{
 					document.getElementById('validationMessagePart2').innerHTML = "Price must not be negative";
-					errorMessage.classList.remove("hidden")
+					errorMessage.classList.remove("hidden");
 				}
 
 				else if (!validateNumericField(price,3))
 				{
 					document.getElementById('validationMessagePart2').innerHTML = "Price must be numeric";
-					errorMessage.classList.remove("hidden")
+					errorMessage.classList.remove("hidden");
 				}
 
 				else if (!validateAlphaNumeric(name,0)) {
 					document.getElementById('validationMessagePart2').innerHTML = "Name must be alphanumeric characters only";
-					errorMessage.classList.remove("hidden")
+					errorMessage.classList.remove("hidden");
 				}
 
 				else if (!validateAlphaNumeric(name,1)) {
@@ -291,10 +296,12 @@
 
 				else if (!validateAlphaNumeric(name,2)) {
 					document.getElementById('validationMessagePart2').innerHTML = "Name must contains atleast 2 letters";
-					errorMessage.classList.remove("hidden")
+					errorMessage.classList.remove("hidden");
 				}
 
 				else {
+
+					success = true;
 
 					var productInfo = {
 						name: name,
@@ -325,13 +332,21 @@
 					}
 				}
 			}
-			form.reset();
+			if (success) {
+				form.reset();
+			}
 		}
 
 		document.getElementById('totalProduct').onclick = function() {
 			document.getElementById('productTotalValue').innerHTML="";
 			totalProduct=0;
 
+			if (typeof product == "undefined") {
+				document.getElementById('productTotalValue').innerHTML += "No product available";
+				document.getElementById('productTotal').innerHTML = "No product available";
+			}
+
+			else{	
 				for (x of product){
 					parseproduct = JSON.parse(x);
 					keys=Object.keys(parseproduct);
@@ -343,6 +358,7 @@
 
 					}
 				}
+		}
 
 	</script>
 </body>
