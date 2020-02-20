@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>JAVASCRIPT: Activity 2</title>
+	<title>JAVASCRIPT: Activity 3</title>
 
 			<!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
@@ -13,17 +13,20 @@
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
 </head>
+
 <body>
 	<div class = "container">
 		<h4>PART 1:</h4>
 		<p>A form that accepts a name and age input. On every form submit, add the inputted values to an object. Display the object value and display the readable formatted value. </span></p>
-		
-		<form>
+		<div id= "alertPart1" class = "alert alert-danger hidden" ><span id="validationMessage"></span></div>
+
+		<form id="form1">
 			<label for="lblName">Name: </label>
 			<input type="text" name="personName" id="txtName" placeholder="your Name">
 			<label for="lblAge">Age: </label>
 			<input type="number" name="personAge" id="txtAge" placeholder="Age">	
-			<input class="btn btn-primary btn-sm" type="button" value="Add" id="add" onclick="generate()">		
+			<input class="btn btn-primary btn-sm" type="button" value="Add" id="add" onclick="generate()">
+			<!-- <input class="btn btn-primary btn-sm" type="button" value="Add" id="add"> -->
 			
 			<h3><strong>Final Object: </strong></h3>
 			<h4><span id="finalObject"></span></h4>
@@ -33,19 +36,20 @@
 			<hr>
 		</form>
 
-	<h4>PART 2:</h4>
+		<h4>PART 2:</h4>
 		<p>Create a PRODUCT INVENTORY. Create a form that will accept the name, stocks, price of product. <br>
 			On every submit add the product to the list or to an object. Display the product list. <br>
 			There must be also a button that when clicked will calculate how much is the total cost of EVERY product and calculate for the total cost of ALL the products.</span></p>
 		<h1>Product Inventory</h1><br>
+		<div id= "alertPart2" class = "alert alert-danger hidden" ><span id="validationMessagePart2"></span></div>
 
-		<form>
+		<form id="form2">
 			<label for="lblProductName">Name: </label>
-			<input type="text" name="productName" id="txtProductName" placeholder="Product Name"><br><br>
+			<input type="text" name="productName" id="txtProductName" class="txtProductInventoryField" placeholder="Product Name"><br><br>
 			<label for="lblStock">Stocks: </label>
-			<input type="number" name="productStock" id="txtProductStock" placeholder="Number of Stocks"><br><br>
+			<input type="number" name="productStock" id="txtProductStock" placeholder="Number of Stocks" value=""><br><br>
 			<label for="lblStock">Price: </label>
-			<input type="number" name="productPrice" id="txtProductPrice" placeholder="Price"><br><br>
+			<input type="number" name="productPrice" id="txtProductPrice" placeholder="Price"  value=""><br><br>
 			<input  class="btn btn-primary btn-sm" type="button" value="Add" id="addProduct">
 
 			<h2>Product List: </h2>
@@ -69,90 +73,276 @@
 		var totalProduct=0;
 		var sumPerProduct=0;
 
+		//name, name
+		function validateEmptyField(text) {
+
+			if (text == "") {
+				
+				return false;
+			}
+			return true;
+		}
+
+
+		//type 1 -not less than 0; 2-not numeric or has decimal; 3-not numeric only
+		function validateNumericField(number,type) {
+			var invalidNumber = /^[a-zA-Z]+$/;
+			if (type == 1) {
+				if (number <= 0) {
+					return false;
+				}
+				
+			}
+			else if (type == 2) {
+				if (number.match(invalidNumber)) {
+					return false;
+				}
+				else if (number.includes(".")) {
+					return false;
+				}
+			}
+
+			else if (type == 3) {
+				if (number.match(invalidNumber)) {
+					return false;
+				}
+			}
+
+			return true;
+		}
+		//type = 1 - check if numeric only //type = 0- check if match to alphanumeric 
+		function validateAlphaNumeric(text, type) {
+			var letters = /^[0-9a-zA-Z]+$/;
+
+			if (type == 1) {
+				if (!isNaN(text)) {
+					return false;
+				}
+			}
+
+			if (type == 2) {
+				if (text.length < 2) {
+					return false;
+				}
+
+			}
+
+			if (text.match(letters)) {
+				return true;
+			}
+		
+			return false;
+
+		}
+
+
+		//part 1 function
 		function generate() {
 
 			name = document.getElementById('txtName').value;
 			age = document.getElementById('txtAge').value;
+			form = document.getElementById('form1');
 
-			var personInfo = {
-				name: name,
-				age: age,
-			};
+			errorMessage = document.getElementById('alertPart1');
+			errorMessage.classList.add("hidden");
 
-			var myJSON = JSON.stringify(personInfo);
-			
-			if (Array.isArray(person)==true) {
-				person.push(myJSON);
+
+			if (!validateEmptyField(name) && !validateEmptyField(age)) {
+				document.getElementById('validationMessage').innerHTML = "Name and Age are required";
+				errorMessage.classList.remove("hidden")
+
 			}
+			else if (!validateEmptyField(name)) {
+				document.getElementById('validationMessage').innerHTML = "Name is required";
+				errorMessage.classList.remove("hidden")
+			}
+			else if (!validateEmptyField(age)){
+				document.getElementById('validationMessage').innerHTML = "Age is required";
+				errorMessage.classList.remove("hidden")
+			}
+
 
 			else {
-				person= new Array (myJSON);
+
+				if (!validateNumericField(age,1))
+				{
+					document.getElementById('validationMessage').innerHTML = "Age must be 1 year old and above";
+					errorMessage.classList.remove("hidden")
+				}
+
+				else if (!validateNumericField(age,2))
+				{
+					document.getElementById('validationMessage').innerHTML = "Age must be numeric";
+					errorMessage.classList.remove("hidden")
+				}
+
+				else if (!validateAlphaNumeric(name,0)) {
+					document.getElementById('validationMessage').innerHTML = "Name must be alphanumeric characters only";
+					errorMessage.classList.remove("hidden")
+				}
+
+				else if (!validateAlphaNumeric(name,1)) {
+					document.getElementById('validationMessage').innerHTML = "Name must contains alpha characters";
+					errorMessage.classList.remove("hidden")
+				}
+
+				else if (!validateAlphaNumeric(name,2)) {
+					document.getElementById('validationMessage').innerHTML = "Name must contains atleast 2 letters";
+					errorMessage.classList.remove("hidden")
+				}
+
+				else {
+
+					var personInfo = {
+						name: name,
+						age: age,
+					};
+
+					var myJSON = JSON.stringify(personInfo);
+					
+					if (Array.isArray(person)==true) {
+						person.push(myJSON);
+					}
+
+					else {
+						person= new Array (myJSON);
+					}
+
+					console.log(person);
+
+					document.getElementById('finalObject').innerHTML = person;
+					document.getElementById('readableFormat').innerHTML="";
+
+					for (x of person){
+						parsePerson = JSON.parse(x);
+						keys=Object.keys(parsePerson);
+						document.getElementById('readableFormat').innerHTML +=  keys[0] +" : " + parsePerson.name + ", " + keys[1] + " : " + parsePerson.age + "<br>";
+					}
+				}
 			}
-
-			console.log(person);
-
-			document.getElementById('finalObject').innerHTML = person;
-			document.getElementById('readableFormat').innerHTML="";
-
-			for (x of person){
-				parsePerson = JSON.parse(x);
-				keys=Object.keys(parsePerson);
-				document.getElementById('readableFormat').innerHTML +=  keys[0] +" : " + parsePerson.name + ", " + keys[1] + " : " + parsePerson.age + "<br>";
-			}
+			form.reset();
 		}
 
-		/*function generateInventory() */
 		document.getElementById('addProduct').onclick = function(){
-
+			
 			name = document.getElementById('txtProductName').value;
 			stocks = document.getElementById('txtProductStock').value;
 			price = document.getElementById('txtProductPrice').value;
 
-			var productInfo = {
-				name: name,
-				stocks: stocks,
-				price: price,
-			};
+			form = document.getElementById('form2');
 
-			console.log(Object.entries(productInfo));
+			errorMessage = document.getElementById('alertPart2');
+			errorMessage.classList.add("hidden");
 
-			var myJSON = JSON.stringify(productInfo);
+			if (!validateEmptyField(name) && !validateEmptyField(stocks) && !validateEmptyField(price)) {
+				document.getElementById('validationMessagePart2').innerHTML = "Product Name is required" + "<br>" + "Stocks is required" + "<br>" + "Price is required";
+				errorMessage.classList.remove("hidden")
+			}
 
-			console.log("JSON"+myJSON);
-			
-			if (Array.isArray(product)==true) {
-				product.push(myJSON);
+			else if(!validateEmptyField(name)) {
+				document.getElementById('validationMessagePart2').innerHTML = "Product Name is required";
+				errorMessage.classList.remove("hidden")
+			}
+			else if (!validateEmptyField(stocks)){
+				document.getElementById('validationMessagePart2').innerHTML = "Stocks is required";
+				errorMessage.classList.remove("hidden")
+			}
+
+			else if (!validateEmptyField(price)){
+				document.getElementById('validationMessagePart2').innerHTML = "Price is required";
+				errorMessage.classList.remove("hidden")
 			}
 
 			else {
-				product= new Array (myJSON);
+
+				if (!validateNumericField(stocks,1))
+				{
+					document.getElementById('validationMessagePart2').innerHTML = "Stocks must not be less than 0";
+					errorMessage.classList.remove("hidden")
+				}
+
+				else if (!validateNumericField(stocks,2))
+				{
+					document.getElementById('validationMessagePart2').innerHTML = "Stocks must be numeric";
+					errorMessage.classList.remove("hidden")
+				}
+
+				else if (!validateNumericField(price,1))
+				{
+					document.getElementById('validationMessagePart2').innerHTML = "Price must not be negative";
+					errorMessage.classList.remove("hidden")
+				}
+
+				else if (!validateNumericField(price,3))
+				{
+					document.getElementById('validationMessagePart2').innerHTML = "Price must be numeric";
+					errorMessage.classList.remove("hidden")
+				}
+
+				else if (!validateAlphaNumeric(name,0)) {
+					document.getElementById('validationMessagePart2').innerHTML = "Name must be alphanumeric characters only";
+					errorMessage.classList.remove("hidden")
+				}
+
+				else if (!validateAlphaNumeric(name,1)) {
+					document.getElementById('validationMessagePart2').innerHTML = "Name must contains alpha characters";
+					errorMessage.classList.remove("hidden")
+				}
+
+				else if (!validateAlphaNumeric(name,2)) {
+					document.getElementById('validationMessagePart2').innerHTML = "Name must contains atleast 2 letters";
+					errorMessage.classList.remove("hidden")
+				}
+
+				else {
+
+					var productInfo = {
+						name: name,
+						stocks: stocks,
+						price: price,
+					};
+
+					console.log(Object.entries(productInfo));
+
+					var myJSON = JSON.stringify(productInfo);
+
+					console.log("JSON"+myJSON);
+					
+					if (Array.isArray(product)==true) {
+						product.push(myJSON);
+					}
+
+					else {
+						product = new Array (myJSON);
+					}
+
+					document.getElementById('productList').innerHTML="";
+					
+					for (x of product){
+						parseproduct = JSON.parse(x);
+						keys=Object.keys(parseproduct);
+						document.getElementById('productList').innerHTML +=  keys[0] +" : " + parseproduct.name + ", " + keys[1] + " : " + parseproduct.stocks + ", " + keys[2] + " : " + parseproduct.price + "<br>";
+					}
+				}
 			}
-
-			document.getElementById('productList').innerHTML="";
-			totalProduct=0;
-
-
-			for (x of product){
-				parseproduct = JSON.parse(x);
-				keys=Object.keys(parseproduct);
-				document.getElementById('productList').innerHTML +=  keys[0] +" : " + parseproduct.name + ", " + keys[1] + " : " + parseproduct.stocks + ", " + keys[2] + " : " + parseproduct.price + "<br>";
-
-				sumPerProduct = parseproduct.stocks * parseproduct.price;
-				totalProduct = totalProduct + sumPerProduct;
-				console.log(sumPerProduct);
-			}
+			form.reset();
 		}
 
 		document.getElementById('totalProduct').onclick = function() {
 			document.getElementById('productTotalValue').innerHTML="";
+			totalProduct=0;
+
 				for (x of product){
 					parseproduct = JSON.parse(x);
 					keys=Object.keys(parseproduct);
-					document.getElementById('productTotalValue').innerHTML += parseproduct.name + " will have a total value of " + sumPerProduct + "<br>";
-					document.getElementById('productTotal').innerHTML = "Total " + totalProduct;
+					sumPerProduct = parseproduct.stocks * parseproduct.price;
+					totalProduct = totalProduct + sumPerProduct;
+
+					document.getElementById('productTotalValue').innerHTML += parseproduct.name + " will have a total value of " + sumPerProduct.toFixed(2) + "<br>";
+					document.getElementById('productTotal').innerHTML = "Total " + totalProduct.toFixed(2);
+
 					}
 				}
-				
 
 	</script>
 </body>
