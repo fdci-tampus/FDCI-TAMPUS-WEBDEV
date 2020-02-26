@@ -103,6 +103,10 @@
 			</div>
 			<div id="displayProfile" style="display:none;">
 				<span id="displayProfileInfo"></span>
+				<br>
+				<div class="input-group col-md-12">
+					<button type="button" class="btn btn-primary" id="goOver" onclick="goOver()">Go Over</button>
+				</div>
 			</div>
 		</div>
 		
@@ -149,14 +153,14 @@
 				for (key in text) {
 
 					if (key == "Name") {
-						if (!text[key].match(validName)) {
+						if (!text[key].match(validName) && text[key] != "") {
 						message += key + " is invalid name<br>";
 						}
 					}
 
 					else if (key == "Hobbies") {
 						if (text[key].length < 3) {
-							message += "Select atleast 3 hobbies";
+							message += "Select atleast 3 hobbies<br>";
 						}
 					}	
 				}
@@ -201,9 +205,13 @@
 
 			}
 
+			function goOver() {
+				profiles = document.getElementById("displayProfile");
+				profileInput = document.getElementById("profile");
+				profiles.style.display = "none";
+				profileInput.style.display = "block";
+			}
 
-			
-			
 			var profileForm = document.getElementById("profile");
 
 				profileForm.addEventListener('submit', function(event) {
@@ -222,9 +230,6 @@
 				for (i = 0; i < myHobbies.length; i++) {
 					hobbies.push(myHobbies[i].value);
 				}
-				console.log(hobbies);
-
-				
 
 				var profile = {
 				Name: name,
@@ -233,21 +238,24 @@
 				About: aboutYourself 
 				};
 
-				console.log(profile);
-				displayErrorMessage(getText(profile));
+				checkObject = getText(profile);
 
-				
-				profiles = document.getElementById("displayProfile");
-				profileInput = document.getElementById("profile");
-				profiles.style.display = "block";
-				profileInput.style.display = "none";
-				
-				for (key in profile) {
-
-					document.getElementById('displayProfileInfo').innerHTML = "Hi " + profile.Name + "<br>" + "Your gender is " + profile.Gender + "<br>" + "Your hobbies are " + profile.Hobbies + "<br>" + "Here's a little fact about yourself: " + profile.About;
-
+				if (checkObject) {
+					displayErrorMessage(checkObject);
+					message="";
 				}
 
+				else {
+					profiles = document.getElementById("displayProfile");
+					profileInput = document.getElementById("profile");
+					profiles.style.display = "block";
+					profileInput.style.display = "none";
+					
+					for (key in profile) {
+
+						document.getElementById('displayProfileInfo').innerHTML = "Hi " + "<strong>" +profile.Name + "</strong>" + "<br>" + "Your gender is " + "<strong>" + profile.Gender + "</strong>" + "<br>" + "Your hobbies are " + profile.Hobbies + "<br>" + "Here's a little fact about yourself: " + profile.About;
+					}
+				}
 			});
 
 			function displayErrorMessage(errorMessage) {
@@ -285,6 +293,7 @@
 						titleDiv.removeAttribute("class");
 					}
 				}
+
 			}
 			
 		</script>
