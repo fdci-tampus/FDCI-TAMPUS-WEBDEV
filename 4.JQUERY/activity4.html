@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>JAVASCRIPT: Activity 4</title>
+
+				<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+	</head>
+
+	<body>
+		<div class="container">
+			<p>Create a form and use proper validations.
+				<a href="https://www.loom.com/share/63d122c8923347e8836bfd12504153db">LINK</a>
+			</p>
+			<hr>
+			<div class="row col-md-12">
+				<h1>Profile</h1>
+				<form id="profile" style="display: block;">
+					<div id="lblProfile">
+						
+					</div>
+					<br>
+					<div class="form-group">
+						<div class="input-group col-md-8">
+					 		<label for="txtName">What's your name?</label>
+					  		<input type="text" class="form-control " placeholder="Jane Doe" id="txtName">
+					  	
+					  	<br>
+					  	<div class="input-group col-md-8">
+							<div class="dropdown input-group col-md-4">
+								<br>
+								<label for="dropdownGender">Gender</label>
+								<select id="txtGender"  class="btn btn-default dropdown-toggle form-control">
+									<option value="male">Male</option>
+									<option value="female">female</option>
+									<option value="other">Others</option>
+								</select>
+							</div>
+						</div>
+						<br>
+						<div class="input-group col-md-8">
+							<label for="checkBoxHobby">Hobbies</label>
+							<div id="hobbiesGroup">
+								<div class="checkbox">
+								  <label>
+								    <input type="checkbox" class="hobby" name="hobbies" value="Singing">Singing
+								  </label>
+								</div>
+								<div class="checkbox">
+								  <label>
+								    <input type="checkbox" class="hobby" name="hobbies" value="Dancing">Dancing			
+								  </label>
+								</div>
+								<div class="checkbox">
+								  <label>						   
+								    <input type="checkbox" class="hobby" name="hobbies" value="Travelling">Travelling
+								  </label>
+								</div>
+								<div class="checkbox">
+								  <label>
+								    <input type="checkbox" class="hobby" name="hobbies" value="Reading">Reading
+								  </label>
+								</div>
+								<div class="checkbox">
+								  <label>
+								    <input type="checkbox" class="hobby" name="hobbies" value="Sleeping">Sleeping
+								  </label>
+								</div>
+							</div>
+							<div class="btn-group" id="txtAddHobby" style="display:none; margin-bottom: 10px;">
+									<!-- <input type="text">Add Hobby</button> -->
+									<input type="text" class="form-control" id="txtAddNewHobby">
+							</div>
+
+								<div class="btn-group">
+									<button type="button" class="btn btn-primary" id="addHobbies" onclick="addHobby()">Add Hobby</button>
+								</div>
+							<br>
+						</div>
+						<br> 
+						<div class="input-group col-md-8">
+							<label for="txtAboutYourself">Tell me a little thing about yourself</label>
+							<div class="textarea">
+							<textarea class="form-control" rows="4" style="resize: vertical;" onkeyup="checkCharacter()" id="txtArea" maxlength="20"></textarea><br>
+							</div>
+							<div class="input-group col-md-12">
+								<span id="count">0</span><span>/20</span>
+							</div>
+							<br>
+							<div class="input-group col-md-12">
+								<button type="submit" class="btn btn-primary" id="submitButton">Submit</button>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+			<div id="displayProfile" style="display:none;">
+				<span id="displayProfileInfo"></span>
+			</div>
+		</div>
+		
+		<script type="text/javascript">
+
+			var message = "";
+			
+			function isTextEmpty(text) {
+
+				count=0;
+			
+				
+				for (key in text) {
+					console.log(count);
+					console.log(text[key]);
+					
+					if (text[key] == "") {
+						console.log("sulod");
+
+						message += key + " is empty. Please enter a value<br>";
+					}
+					count+=1;
+				}
+				return message;
+			}
+
+			
+
+			function getText(text) {
+				
+				
+				console.log(text);
+
+
+				//validation
+				var validName = /^([A-Z][A-Za-z]+( [A-Z]+\. [A-Z][A-Za-z]+| [A-Za-z]+ [A-Z]\. [A-Z][A-Za-z]+| [A-Z]\.| [A-Za-z]+\.| [A-Za-z]+ [0-9]+(st|nd|rd|th)\.?| [A-Za-z]+|\-[A-Za-z]+|( [A-Za-z]*)*|( [A-Za-z0-9]*\.?(st|nd|rd|th)*)*) ?[A-Za-z]*\.?)$/i;
+
+				console.log(name.match(validName));
+
+
+				isTextEmpty(text);
+				console.log(text);
+
+				for (key in text) {
+
+					if (key == "Name") {
+						if (!text[key].match(validName)) {
+						message += key + " is invalid name<br>";
+						}
+					}
+
+					else if (key == "Hobbies") {
+						if (text[key].length < 3) {
+							message += "Select atleast 3 hobbies";
+						}
+					}	
+				}
+
+				return message;
+			}
+
+			function addHobby() {
+
+				var addHobby = document.getElementById("txtAddHobby");
+				var addHobbyBtn = document.getElementById("addHobbies");
+
+				if (addHobby.style.display == "none") {
+					addHobby.style.display = "block";
+					addHobbyBtn.innerHTML = "Save";
+
+
+				}
+				else {
+
+					var elementInput = "";
+					txtNewHobby = document.getElementById('txtAddNewHobby').value;
+
+					elementInput += '<div class="checkbox">';
+					elementInput += '<label>';
+					elementInput +=  '<input type="checkbox" class="hobby" name="hobbies" value="'+txtNewHobby+'">'+txtNewHobby;
+					elementInput += '</label>';
+					elementInput += '</div>';
+					
+					document.getElementById("hobbiesGroup").innerHTML += elementInput;
+
+					addHobby.style.display = "none";
+					addHobbyBtn.innerHTML = "Add Hobby";
+				}
+
+			}
+			
+			function checkCharacter() {
+				
+				count = document.getElementById('count');
+				count.innerHTML = document.getElementById('txtArea').value.length;
+
+			}
+
+
+			
+			
+			var profileForm = document.getElementById("profile");
+
+				profileForm.addEventListener('submit', function(event) {
+
+				event.preventDefault();
+
+				errorMessage = document.getElementById('lblProfile');
+
+				name = document.getElementById('txtName').value;
+				gender = document.getElementById('txtGender').value;
+				myHobbies = document.querySelectorAll('.hobby:checked');
+				aboutYourself = document.getElementById('txtArea').value;
+
+				hobbies = new Array(); 
+
+				for (i = 0; i < myHobbies.length; i++) {
+					hobbies.push(myHobbies[i].value);
+				}
+				console.log(hobbies);
+
+				
+
+				var profile = {
+				Name: name,
+				Gender: gender,
+				Hobbies: hobbies,
+				About: aboutYourself 
+				};
+
+				console.log(profile);
+				displayErrorMessage(getText(profile));
+
+				
+				profiles = document.getElementById("displayProfile");
+				profileInput = document.getElementById("profile");
+				profiles.style.display = "block";
+				profileInput.style.display = "none";
+				
+				for (key in profile) {
+
+					document.getElementById('displayProfileInfo').innerHTML = "Hi " + profile.Name + "<br>" + "Your gender is " + profile.Gender + "<br>" + "Your hobbies are " + profile.Hobbies + "<br>" + "Here's a little fact about yourself: " + profile.About;
+
+				}
+
+			});
+
+			function displayErrorMessage(errorMessage) {
+
+				var titleDiv = document.getElementById("lblProfile");
+
+				var checkSpan = document.getElementById("displayMessage");
+
+
+				if (checkSpan != "undefined" && checkSpan !=null) {
+						titleDiv.removeChild(checkSpan);
+						
+					}
+
+				if (errorMessage != ""){
+
+					var attributeType = document.createAttribute("class");
+					attributeType.value = "alert alert-danger";
+					titleDiv.attributes.setNamedItem(attributeType);				
+
+					var message = document.createElement("span");
+					message.innerHTML = errorMessage;
+					document.getElementById("lblProfile").appendChild(message);
+
+					var span = document.querySelector("span");
+					span.setAttribute("id", "displayMessage");
+				}
+			
+				else {
+					var messageDisplay = document.getElementById("displayMessage");
+					
+
+					if (messageDisplay != "undefined" && messageDisplay !=null) {
+						titleDiv.removeChild(messageDisplay);
+						titleDiv.removeAttribute("class");
+					}
+				}
+			}
+			
+		</script>
+	</body>
+</html>
