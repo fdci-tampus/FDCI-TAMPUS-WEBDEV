@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>JAVASCRIPT: Activity 5</title>
+
+				<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css" integrity="sha384-HSMxcRTRxnN+Bdg0JdbxYKrThecOKuH5zCYotlSAcp1+c8xmyTe9GYg1l9a69psu" crossorigin="anonymous">
+
+		<!-- Optional theme -->
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap-theme.min.css" integrity="sha384-6pzBo3FDv/PJ8r2KRkGHifhEocL+1X2rVCTTkUfGk7/0pbek5mMa1upzvWbrUbOZ" crossorigin="anonymous">
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+		<!-- Latest compiled and minified JavaScript -->
+		<script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>
+	</head>
+
+	<body>
+
+		<div class = "container">
+			<div>
+				<h3>PART 1</h3>
+
+				<ul>
+					<li>
+						<a href="#" class="question" id="question1">First question?</a>
+						<p id="answer1" class="answer">This is the first answer</p>
+					</li>
+					<li>
+						<a href="#" class="question" id="question2">Second question?</a>
+						<p id="answer2" class="answer">This is the second answer</p>
+					</li>
+					<li>
+						<a href="#" class="question" id="question3">Third question?</a>
+						<p id="answer3" class="answer">This is the third answer</p>
+					</li>
+				</ul>
+			</div>
+
+			<hr>
+
+			<div>
+				<h3>PART 2</h3>
+
+				<div>
+					<button id ="btnAnimation">start animation</button>
+				</div><br>
+
+				<div id="part2" style="background:#98bf21;height:100px;width:100px;border-style:solid;border-width:2px;border-color: #5a720e;"></div>
+				
+			</div>
+
+			<hr>
+
+			<div>
+				<h3>PART 3</h3>
+
+				<div>
+					<button id ="btnAnimation1">start animation</button>
+				</div><br>
+
+				<div id="part3" style="background:#98bf21;height:100px;width:100px;"></div>
+				
+			</div>
+
+		</div>
+
+		<script type="text/javascript">
+			$(document).ready(function(){
+
+				$(".answer").hide();
+				$(".question").click(function(){
+
+					var question = $(this).closest("li").find(".answer");
+
+					if(question.is(":visible")) {
+						question.hide();
+					}
+					else {
+						$(".answer").hide();
+						question.fadeIn();
+					}
+				});
+
+				$("#btnAnimation").click(function(){
+					$("#part2").animate({height:"100px",width:"100px",borderWidth:"2px",marginLeft: "0"});
+					
+					var div = $("#part2");
+					div.animate({width: '300px'},"slow");
+					div.animate({height: '300px'},"slow");
+					div.animate({marginLeft: '100px'}, "slow");
+					div.animate({borderWidth: '10px', height: '310px', width: '310px'}, "slow");
+				});
+
+				var height = 100;
+				var margin = 0;
+				$("#btnAnimation1").click(function(){
+
+					height += 50;
+					margin += 75;
+
+					if (height > 250) {
+						height = 100;
+						margin = 0;
+					}
+
+					var heightPX = height + "px";
+					var marginPX = margin + "px";
+
+					$("#part3").animate({width:heightPX,height:heightPX,marginLeft:marginPX,marginTop:marginPX});
+					
+				});
+			});
+
+		</script>
+	</body>
+</html>
